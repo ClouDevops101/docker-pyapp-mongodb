@@ -15,7 +15,8 @@ def get_all_stars():
   star = db.star
   output = []
   for s in star.find():
-    output.append({'name' : s['name'], 'age' : s['age']})
+    #output.append({'name' : s['name'], 'age' : s['age']})
+    output.append({'name' : s['name'], 'hello' : 'world'})
   return jsonify({'result' : output})
 
 @app.route('/star/name/<string:name>', methods=['GET'])
@@ -94,15 +95,16 @@ def add_star():
   new_star = star.find_one({'_id': star_id })
   output = {'name' : new_star['name'], 'age' : new_star['age']}
   return jsonify({'result' : output})
+#
 
 @app.route('/view')
 def todo():
   star = db.star
   _items = star.find()
-  items = [item for item in _items]
-  return render_template('todo.html', items=items)
-
-
+ # items = [item for item in _items]
+  #items = list (_items)
+  #return render_template('todo.html', items=items)
+  return render_template('todo.html', items=_items)
 @app.route('/new', methods=['POST'])
 def new():
 
