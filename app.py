@@ -15,8 +15,7 @@ def get_all_stars():
   star = db.star
   output = []
   for s in star.find():
-    #output.append({'name' : s['name'], 'age' : s['age']})
-    output.append({'name' : s['name'], 'hello' : 'world'})
+    output.append({'name' : s['name'], 'age' : s['age']})
   return jsonify({'result' : output})
 
 @app.route('/star/name/<string:name>', methods=['GET'])
@@ -91,6 +90,9 @@ def add_star():
   star = db.star
   name = request.json['name']
   age = request.json['age']
+  if request.headers['Content-Type'] != 'application/json; charset=UTF-8':
+      output = {'id' : 1 , 'error' : 'wrong type', 'message' : 'please use the appropirate header Content-Type'}
+      return jsonify({'result' : output })
   star_id = star.insert({'name': name, 'age': age})
   new_star = star.find_one({'_id': star_id })
   output = {'name' : new_star['name'], 'age' : new_star['age']}

@@ -1,6 +1,7 @@
 web:
-  image: python-flask-pymongo
-  command: python -u app.py
+  build: .
+  #image: python-mongo:1
+  command: python  app.py
   #command: python -u mongo-rest-api.py
   ports:
     - "5000:5000"
