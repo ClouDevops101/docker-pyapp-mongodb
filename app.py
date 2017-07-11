@@ -93,6 +93,7 @@ def add_star():
   if request.headers['Content-Type'] != 'application/json; charset=UTF-8':
       output = {'id' : 1 , 'error' : 'wrong type', 'message' : 'please use the appropirate header Content-Type'}
       return jsonify({'result' : output })
+  "Addding value to the database"
   star_id = star.insert({'name': name, 'age': age})
   new_star = star.find_one({'_id': star_id })
   output = {'name' : new_star['name'], 'age' : new_star['age']}
